@@ -7,9 +7,10 @@
         <entry key="app/src/main/res/drawable/movie_card_bg.xml" value="0.108" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2229440790855946" />
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.24003623188405798" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19573974609375003" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.30520231213872834" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.24003623188405798" />
-        <entry key="app/src/main/res/layout/movie_vertical_card.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/movie_horizontal_card.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/movie_vertical_card.xml" value="0.48415213946117275" />
         <entry key="app/src/main/res/layout/movies_horizontal_card.xml" value="0.27071685791015626" />
         <entry key="app/src/main/res/layout/movies_vertical_cards.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.3171875" />

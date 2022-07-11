@@ -15,8 +15,6 @@ private const val TAG = "BindingAdapters"
 @BindingAdapter("bindImage")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-//        val imageUrl = imagePreUrl + imgUrl
-        Log.d(TAG, "bindImage: $imgUrl")
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
             .load(imgUri)

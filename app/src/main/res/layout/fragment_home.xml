@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.HomeFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.moviesapp.ui.home.HomeViewModel" />
@@ -18,7 +19,7 @@
             android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
+            android:elevation="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -30,8 +31,8 @@
 
                 <ImageView
                     android:layout_width="25dp"
-                    android:layout_height="23dp"
-                    android:src="@drawable/ic_outline_home_24" />
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_movie_filter_24" />
 
                 <TextView
                     android:id="@+id/home_toolbar_textView"
@@ -39,9 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="MoviesApp"
-                    android:textSize="20dp"
-                    tools:layout_editor_absoluteX="51dp"
-                    tools:layout_editor_absoluteY="18dp" />
+                    style="@style/bg_heading" />
 
             </LinearLayout>
 
@@ -64,7 +63,7 @@
 
                 <TextView
                     android:id="@+id/dream_companies_textView"
-                    style="@style/bg_heading"
+                    style="@style/bg_heading.margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Now Showing"
@@ -76,10 +75,10 @@
                     android:id="@+id/now_showing_recyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp"
+                    android:paddingStart="14dp"
                     app:bindMovieVertical="@{viewModel.moviesList}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +89,7 @@
 
                 <TextView
                     android:id="@+id/recent_interview_textView"
-                    style="@style/bg_heading"
+                    style="@style/bg_heading.margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Popular"
