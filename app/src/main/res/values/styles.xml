@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="bg_heading">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="movie_card_style">
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:background">@drawable/movie_card_bg</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+</resources>

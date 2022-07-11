@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="movie"
+            type="com.example.moviesapp.models.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/company_card"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/company_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bindImage="@{@string/addImageUrl(movie.poster_path)}"
+            app:layout_constraintBottom_toTopOf="@+id/company_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:background="@color/teal_200"
+            android:paddingTop="4dp"
+            android:text="@{movie.title}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/company_logo"
+            app:layout_constraintTop_toBottomOf="@+id/company_logo"
+            tools:text="Eternals" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
