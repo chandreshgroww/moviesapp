@@ -25,16 +25,13 @@ private val retrofitMovie = Retrofit.Builder()
     .build()
 
 interface ApiService {
+
     @GET("/3/discover/movie")
-    suspend fun getLatestMoviesAsync(
+    suspend fun getMovieListAsync(
         @Query("sort_by") sort_by: String,
         @Query("api_key") api_key: String = apiKey
     ): Response<DiscoverResult>
 
-    @GET("/3/movie/popular")
-    suspend fun getPopularMoviesAsync(
-        @Query("api_key") api_key: String = apiKey
-    ): Response<DiscoverResult>
 }
 
 object MovieApi {

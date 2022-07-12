@@ -1,10 +1,16 @@
 package com.example.moviesapp.models
 
+import androidx.room.Entity
+import androidx.room.OnConflictStrategy
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "all_movies")
 data class Movie(
+    @PrimaryKey
+    val id: Int,
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
-    val id: Int,
     val original_language: String,
     val original_title: String,
     val overview: String,

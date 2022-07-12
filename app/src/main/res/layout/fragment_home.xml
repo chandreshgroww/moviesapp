@@ -9,6 +9,7 @@
         <variable
             name="viewModel"
             type="com.example.moviesapp.ui.home.HomeViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,12 +28,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/ic_baseline_movie_filter_24" />
+                    android:src="@drawable/ic_baseline_movie_filter_24"
+                    android:layout_weight="0.03"/>
 
                 <TextView
                     android:id="@+id/home_toolbar_textView"
@@ -40,11 +44,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="MoviesApp" />
+                    android:text="MoviesApp"
+                    android:layout_weight="0.87"/>
+
+                <TextView
+                    android:id="@+id/error_toolbar_textView"
+                    style="@style/title_heading"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="Error"
+                    app:showOnError="@{viewModel.networkStatus}"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_weight="0.05"/>
+
+                <ProgressBar
+                    android:layout_width="25dp"
+                    android:textAlignment="viewEnd"
+                    android:foregroundGravity="right"
+                    android:layout_height="25dp"
+                    app:showOnLoading="@{viewModel.networkStatus}"
+                    android:layout_weight="0.05"/>
 
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
+
+<!--        <include-->
+<!--            android:id="@+id/network_loader_companies"-->
+<!--            layout="@layout/network_loader"-->
+<!--            android:layout_width="0dp"-->
+<!--            tools:visibility="gone"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/home_toolbar"-->
+<!--            app:status="@{viewModel.networkStatus}" />-->
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/home_nested_scrollview"
@@ -52,9 +89,10 @@
             android:layout_height="0dp"
             android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
             tools:context=".home.HomeFragment">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_constraint_layout"
@@ -92,8 +130,8 @@
                     style="@style/bg_heading.margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Popular"
                     android:layout_marginTop="18dp"
+                    android:text="Popular"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/now_showing_recyclerView" />
@@ -105,7 +143,7 @@
                     android:layout_marginTop="6dp"
                     android:nestedScrollingEnabled="false"
                     android:paddingStart="14dp"
-                    app:bindMovieHorizontal="@{viewModel.latestMovieList}"
+                    app:bindMovieHorizontal="@{viewModel.voteCountMovieList}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recent_interview_textView"

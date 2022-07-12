@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.moviesapp.MainApplication
 import com.example.moviesapp.R
 import com.example.moviesapp.adapter.MovieHorizontalAdapter
 import com.example.moviesapp.adapter.MovieHorizontalListener
@@ -30,16 +31,22 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        val repository = MovieRepository(MovieApi.retrofitService)
-        viewModel = ViewModelProvider(this, HomeViewModelFactory(repository))[HomeViewModel::class.java]
+
+        val repository = (activity?.application as MainApplication).movieRepository
+
+        viewModel =
+            ViewModelProvider(this, HomeViewModelFactory(repository))[HomeViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        initializeNowShowing()
-
-        initializePopular()
+        initializeAdapters()
 
         return binding.root
+    }
+
+    private fun initializeAdapters() {
+        initializeNowShowing()
+        initializePopular()
     }
 
     private fun initializePopular() {

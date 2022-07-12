@@ -3,40 +3,36 @@ package com.example.moviesapp.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.moviesapp.models.DiscoverResult
+import androidx.lifecycle.Transformations
+import com.example.moviesapp.database.DatabaseDao
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.network.ApiService
-import java.lang.Exception
+import com.example.moviesapp.util.NetworkResult
+import com.example.moviesapp.util.SortBy
 
 private const val TAG = "MovieRepository"
 
-class MovieRepository(private val apiService: ApiService) {
+class MovieRepository(private val apiService: ApiService, private val databaseDao: DatabaseDao) {
 
-    private val _popularMovieList = MutableLiveData<List<Movie>>()
-    val popularMovieList: LiveData<List<Movie>>
-        get() = _popularMovieList
+    val popularMovieList = databaseDao.getPopularMovieList()
 
-    private val _latestMovieList = MutableLiveData<List<Movie>>()
-    val latestMovieList: LiveData<List<Movie>>
-        get() = _latestMovieList
+    val voteCountMovieList = databaseDao.getVoteCountMovieList()
 
-    suspend fun getPopularMoviesList() {
-        val resultMovies = apiService.getPopularMoviesAsync()
+    suspend fun fetchLatestMovies(sortBy: SortBy): NetworkResult {
+        var networkStatus: NetworkResult = NetworkResult.Loading
         try {
-            _popularMovieList.postValue(resultMovies.body()?.results)
-        } catch (e: Exception) {
-            Log.i(TAG, "getMoviesList: $e")
+            val resultBody = apiService.getMovieListAsync(sortBy.notation).body()
+            val moviesList = resultBody?.results
+            moviesList?.let {
+                databaseDao.addMovieList(it)
+                networkStatus = NetworkResult.Success(moviesList)
+            }
         }
+        catch (e: Exception) {
+            networkStatus = NetworkResult.Error(e.message)
+        }
+        return networkStatus
     }
 
-    suspend fun getLatestMoviesList() {
-        val resultMovies = apiService.getLatestMoviesAsync("vote_count.desc")
-        try {
-            _latestMovieList.postValue(resultMovies.body()?.results)
-        } catch (e: Exception) {
-            Log.i(TAG, "getMoviesList: $e")
-        }
-    }
 
 }
