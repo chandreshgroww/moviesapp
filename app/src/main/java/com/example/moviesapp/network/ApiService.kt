@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
@@ -25,15 +26,15 @@ private val retrofitMovie = Retrofit.Builder()
 
 interface ApiService {
     @GET("/3/discover/movie")
-    fun getLatestMoviesAsync(
+    suspend fun getLatestMoviesAsync(
         @Query("sort_by") sort_by: String,
         @Query("api_key") api_key: String = apiKey
-    ): Deferred<DiscoverResult>
+    ): Response<DiscoverResult>
 
     @GET("/3/movie/popular")
-    fun getPopularMoviesAsync(
+    suspend fun getPopularMoviesAsync(
         @Query("api_key") api_key: String = apiKey
-    ): Deferred<DiscoverResult>
+    ): Response<DiscoverResult>
 }
 
 object MovieApi {

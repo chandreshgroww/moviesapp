@@ -13,6 +13,10 @@ import com.example.moviesapp.adapter.MovieHorizontalListener
 import com.example.moviesapp.adapter.MovieVerticalAdapter
 import com.example.moviesapp.adapter.MovieVerticalListener
 import com.example.moviesapp.databinding.FragmentHomeBinding
+import com.example.moviesapp.models.Movie
+import com.example.moviesapp.network.ApiService
+import com.example.moviesapp.network.MovieApi
+import com.example.moviesapp.repository.MovieRepository
 
 private const val TAG = "HomeFragment"
 
@@ -26,7 +30,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val repository = MovieRepository(MovieApi.retrofitService)
+        viewModel = ViewModelProvider(this, HomeViewModelFactory(repository))[HomeViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
