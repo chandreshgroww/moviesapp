@@ -25,6 +25,7 @@ class MovieHorizontalAdapter(private val movieHorizontalListener: MovieHorizonta
     class ViewHolder private constructor(private val binding: MovieHorizontalCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movie, movieHorizontalListener: MovieHorizontalListener) {
+            binding.movie = item
             binding.executePendingBindings()
         }
         companion object {

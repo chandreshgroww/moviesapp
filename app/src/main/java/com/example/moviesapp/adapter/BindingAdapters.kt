@@ -15,6 +15,7 @@ private const val TAG = "BindingAdapters"
 @BindingAdapter("bindImage")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
+        Log.d(TAG, "bindImage: $imgUrl")
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
             .load(imgUri)
@@ -25,5 +26,11 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 @BindingAdapter("bindMovieVertical")
 fun bindMovieVertical(recyclerView: RecyclerView, data: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieVerticalAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("bindMovieHorizontal")
+fun bindMovieHorizontal(recyclerView: RecyclerView, data: List<Movie>?) {
+    val adapter = recyclerView.adapter as MovieHorizontalAdapter
     adapter.submitList(data)
 }

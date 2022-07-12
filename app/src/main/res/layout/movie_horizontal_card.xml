@@ -3,52 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="movie"
+            type="com.example.moviesapp.models.Movie" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/movie_card_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/movie_card_style">
+        android:paddingEnd="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/movie_poster_cardView"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/movie_poster_imageView"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                app:bindImage="@{@string/addImageUrl(movie.poster_path)}"
+                tools:src="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/article_heading_movie_card"
+            style="@style/title_heading"
+            android:layout_width="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{movie.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movie_poster_cardView"
+            app:layout_constraintTop_toTopOf="@+id/movie_poster_cardView"
+            tools:text="Venom Let There Be Carnage" />
+
+        <TextView
+            android:id="@+id/article_subtext_movie_card"
+            style="@style/subtext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{movie.overview}"
+            tools:text="This is a fantastic movie about a fantastic beast who kills ..."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_heading_movie_card"
+            app:layout_constraintStart_toStartOf="@+id/article_heading_movie_card"/>
 
         <ImageView
-            android:id="@+id/company_logo_article_card"
+            android:id="@+id/rating_imageView"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintStart_toStartOf="@+id/article_subtext_movie_card"
+            app:layout_constraintTop_toBottomOf="@+id/article_subtext_movie_card" />
 
         <TextView
-            android:id="@+id/company_name_article_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Hello"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/mulish_regular"
+            android:text="@{@string/rating(movie.vote_average)}"
+            android:textColor="#9C9C9C"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/company_logo_article_card"
-            app:layout_constraintStart_toEndOf="@+id/company_logo_article_card"
-            app:layout_constraintTop_toTopOf="@+id/company_logo_article_card"
-            tools:text="@string/app_name" />
-
-        <TextView
-            android:id="@+id/article_heading_article_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Hello"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/company_logo_article_card"
-            app:layout_constraintTop_toBottomOf="@+id/company_logo_article_card"
-            tools:text="This which I am going to test" />
-
-        <TextView
-            android:id="@+id/subtext_articles_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/article_heading_article_card"
-            app:layout_constraintStart_toStartOf="@+id/article_heading_article_card"
-            app:layout_constraintTop_toBottomOf="@+id/article_heading_article_card"
-            tools:text="Overview:It’s a decent feeling when you score an off-campus internship and gets..." />
+            app:layout_constraintBottom_toBottomOf="@+id/rating_imageView"
+            app:layout_constraintStart_toEndOf="@+id/rating_imageView"
+            app:layout_constraintTop_toTopOf="@+id/rating_imageView"
+            tools:text="8.1/10 IMDb" />
 
         <HorizontalScrollView
             android:id="@+id/chipGroup_horizontal_Scroll"
@@ -57,9 +90,9 @@
             android:layout_marginTop="8dp"
             android:scrollbars="none"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/subtext_articles_card"
-            app:layout_constraintStart_toStartOf="@+id/subtext_articles_card"
-            app:layout_constraintTop_toBottomOf="@+id/subtext_articles_card">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rating_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/rating_imageView">
 
 
             <LinearLayout
@@ -78,7 +111,7 @@
             android:layout_height="15dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_access_time_24"
-            app:layout_constraintStart_toStartOf="@+id/subtext_articles_card"
+            app:layout_constraintStart_toStartOf="@+id/rating_imageView"
             app:layout_constraintTop_toBottomOf="@+id/chipGroup_horizontal_Scroll" />
 
         <TextView

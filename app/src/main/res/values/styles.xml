@@ -15,9 +15,22 @@
 
     <style name="movie_card_style">
         <item name="android:layout_marginBottom">3dp</item>
-        <item name="android:background">@drawable/movie_card_bg</item>
-        <item name="android:paddingTop">20dp</item>
-        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <style name="title_heading">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/mulish_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="subtext">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/mulish_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#ACABAB</item>
     </style>
 
 </resources>

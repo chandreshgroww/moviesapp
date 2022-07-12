@@ -9,9 +9,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL= "https://api.themoviedb.org/"
+private const val BASE_URL = "https://api.themoviedb.org/"
 
-private const val apiKey= "a3674b222a9813d0520b204500146b8a"
+private const val apiKey = "a3674b222a9813d0520b204500146b8a"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -25,8 +25,15 @@ private val retrofitMovie = Retrofit.Builder()
 
 interface ApiService {
     @GET("/3/discover/movie")
-    fun getLatestMoviesAsync(@Query("api_key") api_key:String = apiKey):
-            Deferred<DiscoverResult>
+    fun getLatestMoviesAsync(
+        @Query("sort_by") sort_by: String,
+        @Query("api_key") api_key: String = apiKey
+    ): Deferred<DiscoverResult>
+
+    @GET("/3/movie/popular")
+    fun getPopularMoviesAsync(
+        @Query("api_key") api_key: String = apiKey
+    ): Deferred<DiscoverResult>
 }
 
 object MovieApi {

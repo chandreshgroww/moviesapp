@@ -47,17 +47,12 @@
             android:id="@+id/movie_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:maxLines="2"
-            android:fontFamily="@font/mulish_bold"
-            android:paddingTop="4dp"
             android:text="@{movie.title}"
-            android:textSize="14sp"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/movie_poster_cardView"
             app:layout_constraintStart_toStartOf="@+id/movie_poster_cardView"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_cardView"
-            tools:text="Eternals" />
+            tools:text="Eternals"
+            style="@style/title_heading" />
 
         <ImageView
             android:id="@+id/imageView"

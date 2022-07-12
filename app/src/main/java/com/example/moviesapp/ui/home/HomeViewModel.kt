@@ -14,25 +14,43 @@ private const val TAG = "HomeViewModel"
 
 class HomeViewModel: ViewModel() {
 
-    private val _moviesList = MutableLiveData<List<Movie>>()
-    val moviesList: LiveData<List<Movie>>
-        get() = _moviesList
+    private val _popularMovieList = MutableLiveData<List<Movie>>()
+    val popularMovieList: LiveData<List<Movie>>
+        get() = _popularMovieList
+
+    private val _latestMovieList = MutableLiveData<List<Movie>>()
+    val latestMovieList: LiveData<List<Movie>>
+        get() = _latestMovieList
 
     init {
         Log.d(TAG, "Initialized HomeViewModel")
-        getMoviesList()
+        getPopularMoviesList()
+        getLatestMoviesList()
     }
 
-    private fun getMoviesList() {
+    private fun getPopularMoviesList() {
         viewModelScope.launch {
-            val getMoviesDeferred = MovieApi.retrofitService.getLatestMoviesAsync()
+            val getMoviesDeferred = MovieApi.retrofitService.getPopularMoviesAsync()
             try {
                 val resultMovies = getMoviesDeferred.await()
-                _moviesList.value = resultMovies.results
-                Log.d(TAG, "getMoviesList: ${resultMovies.total_results}")
+                _popularMovieList.value = resultMovies.results
             } catch (e: Exception) {
                 Log.i(TAG, "getMoviesList: $e")
-                _moviesList.value = listOf()
+                _popularMovieList.value = listOf()
+            }
+        }
+    }
+
+    private fun getLatestMoviesList() {
+        viewModelScope.launch {
+            val getMoviesDeferred = MovieApi.retrofitService.getLatestMoviesAsync("vote_count.desc")
+            try {
+                val resultMovies = getMoviesDeferred.await()
+                _latestMovieList.value = resultMovies.results
+                Log.d(TAG, "getLatestMoviesList: ${resultMovies.total_results}")
+            } catch (e: Exception) {
+                Log.i(TAG, "getMoviesList: $e")
+                _latestMovieList.value = listOf()
             }
         }
     }

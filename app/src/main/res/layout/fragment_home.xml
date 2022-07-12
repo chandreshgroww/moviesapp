@@ -36,11 +36,11 @@
 
                 <TextView
                     android:id="@+id/home_toolbar_textView"
+                    style="@style/bg_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="MoviesApp"
-                    style="@style/bg_heading" />
+                    android:text="MoviesApp" />
 
             </LinearLayout>
 
@@ -75,11 +75,11 @@
                     android:id="@+id/now_showing_recyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="6dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingStart="14dp"
-                    app:bindMovieVertical="@{viewModel.moviesList}"
+                    app:bindMovieVertical="@{viewModel.popularMovieList}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -93,16 +93,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Popular"
+                    android:layout_marginTop="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/now_showing_recyclerView" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/articles_recyclerView"
+                    android:id="@+id/popular_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="6dp"
                     android:nestedScrollingEnabled="false"
+                    android:paddingStart="14dp"
+                    app:bindMovieHorizontal="@{viewModel.latestMovieList}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recent_interview_textView"
