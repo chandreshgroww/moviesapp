@@ -10,6 +10,10 @@
         <variable
             name="movie"
             type="com.example.moviesapp.models.Movie" />
+
+        <variable
+            name="clickListener"
+            type="com.example.moviesapp.adapter.MovieVerticalListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +21,9 @@
         android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="6dp"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
+        android:onClick="@{() -> clickListener.onClick(movie)}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

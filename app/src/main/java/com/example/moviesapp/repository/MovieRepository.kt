@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.moviesapp.database.DatabaseDao
 import com.example.moviesapp.models.Movie
+import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.network.ApiService
 import com.example.moviesapp.util.NetworkResult
 import com.example.moviesapp.util.SortBy
@@ -18,6 +19,10 @@ class MovieRepository(private val apiService: ApiService, private val databaseDa
 
     val voteCountMovieList = databaseDao.getVoteCountMovieList()
 
+    private val _movieDetailById = MutableLiveData<NetworkResult>()
+    val movieDetailById: LiveData<NetworkResult>
+        get() = _movieDetailById
+
     suspend fun fetchLatestMovies(sortBy: SortBy): NetworkResult {
         var networkStatus: NetworkResult = NetworkResult.Loading
         try {
@@ -27,12 +32,17 @@ class MovieRepository(private val apiService: ApiService, private val databaseDa
                 databaseDao.addMovieList(it)
                 networkStatus = NetworkResult.Success(moviesList)
             }
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             networkStatus = NetworkResult.Error(e.message)
         }
         return networkStatus
     }
 
+    suspend fun getMovieDetails(movieId: Long): NetworkResult = try {
+        val resultBody = apiService.getMovieDetails(movieId).body()
+        NetworkResult.Success(resultBody)
+    } catch (e: Exception) {
+        NetworkResult.Error(e.message)
+    }
 
 }

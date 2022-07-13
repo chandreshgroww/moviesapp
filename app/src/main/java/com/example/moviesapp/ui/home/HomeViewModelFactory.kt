@@ -13,5 +13,4 @@ class HomeViewModelFactory(private val repository: MovieRepository) :
         }
         throw IllegalArgumentException("Unknown ViewModel")
     }
-
 }

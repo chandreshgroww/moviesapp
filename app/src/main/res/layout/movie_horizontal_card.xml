@@ -8,21 +8,27 @@
         <variable
             name="movie"
             type="com.example.moviesapp.models.Movie" />
+
+        <variable
+            name="clickListener"
+            type="com.example.moviesapp.adapter.MovieHorizontalListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/movie_card_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> clickListener.onClick(movie)}"
         android:paddingEnd="10dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/movie_poster_cardView"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:layout_margin="10dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp"
-            android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -41,9 +47,9 @@
             android:id="@+id/article_heading_movie_card"
             style="@style/title_heading"
             android:layout_width="0dp"
-            android:layout_marginTop="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
             android:text="@{movie.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movie_poster_cardView"
@@ -54,13 +60,13 @@
             android:id="@+id/article_subtext_movie_card"
             style="@style/subtext"
             android:layout_width="0dp"
-            android:maxLines="4"
             android:layout_height="wrap_content"
+            android:maxLines="4"
             android:text="@{movie.overview}"
-            tools:text="This is a fantastic movie about a fantastic beast who kills ..."
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/article_heading_movie_card"
             app:layout_constraintTop_toBottomOf="@+id/article_heading_movie_card"
-            app:layout_constraintStart_toStartOf="@+id/article_heading_movie_card"/>
+            tools:text="This is a fantastic movie about a fantastic beast who kills ..." />
 
         <ImageView
             android:id="@+id/rating_imageView"

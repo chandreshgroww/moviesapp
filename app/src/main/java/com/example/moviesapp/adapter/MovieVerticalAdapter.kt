@@ -26,6 +26,7 @@ class MovieVerticalAdapter(private val movieVerticalListener: MovieVerticalListe
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movie, movieVerticalListener: MovieVerticalListener) {
             binding.movie = item
+            binding.clickListener = movieVerticalListener
             binding.executePendingBindings()
         }
         companion object {

@@ -26,6 +26,7 @@ class MovieHorizontalAdapter(private val movieHorizontalListener: MovieHorizonta
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movie, movieHorizontalListener: MovieHorizontalListener) {
             binding.movie = item
+            binding.clickListener = movieHorizontalListener
             binding.executePendingBindings()
         }
         companion object {

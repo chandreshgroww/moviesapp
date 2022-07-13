@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.moviesapp.MainApplication
 import com.example.moviesapp.R
 import com.example.moviesapp.adapter.MovieHorizontalAdapter
@@ -51,14 +52,14 @@ class HomeFragment : Fragment() {
 
     private fun initializePopular() {
         val adapter = MovieHorizontalAdapter(MovieHorizontalListener {
-            Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it))
         })
         binding.popularRecyclerView.adapter = adapter
     }
 
     private fun initializeNowShowing() {
         val adapter = MovieVerticalAdapter(MovieVerticalListener {
-            Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it))
         })
         binding.nowShowingRecyclerView.adapter = adapter
     }
