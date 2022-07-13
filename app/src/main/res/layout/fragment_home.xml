@@ -55,7 +55,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="Error"
-                    app:showOnError="@{viewModel.networkStatus}"
                     android:textColor="@android:color/holo_red_dark"
                     android:layout_weight="0.05"/>
 
@@ -64,7 +63,6 @@
                     android:textAlignment="viewEnd"
                     android:foregroundGravity="right"
                     android:layout_height="25dp"
-                    app:showOnLoading="@{viewModel.networkStatus}"
                     android:layout_weight="0.05"/>
 
             </LinearLayout>

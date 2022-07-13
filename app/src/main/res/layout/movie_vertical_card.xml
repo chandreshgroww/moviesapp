@@ -13,7 +13,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.moviesapp.adapter.MovieVerticalListener" />
+            type="com.example.moviesapp.adapter.MovieClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.databinding.MovieHorizontalCardBinding
 import com.example.moviesapp.models.Movie
 
-class MovieHorizontalAdapter :
-    PagingDataAdapter<Movie, MovieHorizontalAdapter.ViewHolder>(diffCallback) {
+class MovieHorizontalAdapter(private val movieClickListener: MovieClickListener) :
+    PagingDataAdapter<Movie, MovieHorizontalAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, movieClickListener)
     }
 
     override fun onCreateViewHolder(
@@ -26,9 +26,10 @@ class MovieHorizontalAdapter :
 
     class ViewHolder private constructor(private val binding: MovieHorizontalCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Movie?) {
+        fun bind(item: Movie?, movieClickListener: MovieClickListener) {
             if(item != null)
                 binding.movie = item
+            binding.clickListener = movieClickListener
         }
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -39,20 +40,4 @@ class MovieHorizontalAdapter :
         }
 
     }
-
-    companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return oldItem.title == newItem.title && oldItem.release_date == newItem.release_date
-            }
-        }
-    }
-}
-
-class MovieHorizontalListener(val clickListener: (movie: Movie) -> Unit) {
-    fun onClick(movie: Movie) = clickListener(movie)
 }

@@ -25,13 +25,6 @@ interface ApiService {
         @Query("api_key") api_key: String = Constants.apiKey
     ): Response<DiscoverResult>
 
-    @GET("/3/discover/movie")
-    suspend fun getVoteCountMovieListAsync(
-        @Query("sort_by") sort_by: String,
-        @Query("page") page: Int,
-        @Query("api_key") api_key: String = Constants.apiKey
-    ): DiscoverResult
-
     @GET("/3/movie/{movieId}")
     suspend fun getMovieDetails(
         @Path("movieId") movieId: Long = -1,

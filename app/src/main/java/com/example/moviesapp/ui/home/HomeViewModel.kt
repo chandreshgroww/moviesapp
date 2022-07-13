@@ -19,20 +19,11 @@ import javax.inject.Inject
 
 private const val TAG = "HomeViewModel"
 
-class HomeViewModel @Inject constructor(private val repository: MovieRepository, private val remoteDataSource: RemoteDataSource) : ViewModel() {
+class HomeViewModel @Inject constructor(repository: MovieRepository) : ViewModel() {
 
     val popularMovieList = repository.popularMovieList
 
-//    fun voteCountMovieList(): Flow<PagingData<Movie>> { return Pager(
-//        config = PagingConfig(pageSize = 2, enablePlaceholders = true, maxSize = 100),
-//        pagingSourceFactory = { MoviePagingSource(remoteDataSource.apiService) }
-//    ).flow.cachedIn(viewModelScope)
-//    }
-
-    private val _networkStatus = MutableLiveData<NetworkResult>()
-    val networkStatus: LiveData<NetworkResult>
-        get() = _networkStatus
-
+    val voteCountMovieList = repository.viewCountMovieList
 
 }
 
