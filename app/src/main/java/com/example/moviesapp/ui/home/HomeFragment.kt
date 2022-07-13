@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.moviesapp.MainActivity
 import com.example.moviesapp.MainApplication
 import com.example.moviesapp.R
 import com.example.moviesapp.adapter.MovieHorizontalAdapter
@@ -17,8 +18,8 @@ import com.example.moviesapp.adapter.MovieVerticalListener
 import com.example.moviesapp.databinding.FragmentHomeBinding
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.network.ApiService
-import com.example.moviesapp.network.MovieApi
 import com.example.moviesapp.repository.MovieRepository
+import javax.inject.Inject
 
 private const val TAG = "HomeFragment"
 
@@ -27,16 +28,18 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
 
+    @Inject
+    lateinit var homeViewModelFactory: MainViewModelFactory
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        val repository = (activity?.application as MainApplication).movieRepository
+        (activity?.application as MainApplication).applicationComponent.injectHome(this)
 
-        viewModel =
-            ViewModelProvider(this, HomeViewModelFactory(repository))[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, homeViewModelFactory)[HomeViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

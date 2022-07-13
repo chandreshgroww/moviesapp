@@ -9,10 +9,11 @@ import com.example.moviesapp.repository.MovieRepository
 import com.example.moviesapp.util.NetworkResult
 import com.example.moviesapp.util.SortBy
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 private const val TAG = "HomeViewModel"
 
-class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: MovieRepository) : ViewModel() {
 
     val popularMovieList = repository.popularMovieList
 

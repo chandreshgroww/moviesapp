@@ -11,10 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
 private const val TAG = "DetailsViewModel"
 
-class DetailsViewModel(val movie: Movie, private val repository: MovieRepository): ViewModel() {
+class DetailsViewModel(private val repository: MovieRepository, val movie: Movie): ViewModel() {
 
     private val _networkStatus = MutableLiveData<NetworkResult>()
     val networkStatus: LiveData<NetworkResult>
@@ -23,6 +24,7 @@ class DetailsViewModel(val movie: Movie, private val repository: MovieRepository
     private val _movieDetail = MutableLiveData<MovieDetail>()
     val movieDetail: LiveData<MovieDetail>
         get() = _movieDetail
+
 
     init {
         _movieDetail.value = MovieDetail()
@@ -55,7 +57,7 @@ class DetailsViewModelFactory(private val movie: Movie, private val repository: 
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
-            return DetailsViewModel(movie, repository) as T
+            return DetailsViewModel(repository, movie) as T
         }
         throw IllegalArgumentException("Unknown ViewModel")
     }
