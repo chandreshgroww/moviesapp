@@ -32,18 +32,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-@BindingAdapter("bindMovieVertical")
-fun bindMovieVertical(recyclerView: RecyclerView, data: List<Movie>?) {
-    val adapter = recyclerView.adapter as MovieVerticalAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("bindMovieHorizontal")
-fun bindMovieHorizontal(recyclerView: RecyclerView, data: List<Movie>?) {
-    val adapter = recyclerView.adapter as MovieHorizontalAdapter
-    adapter.submitList(data)
-}
-
 @BindingAdapter("hideOnLoading")
 fun ViewGroup.hideOnLoading(responseState: NetworkResult?) {
     visibility = if (responseState is NetworkResult.Loading || responseState is NetworkResult.Error)

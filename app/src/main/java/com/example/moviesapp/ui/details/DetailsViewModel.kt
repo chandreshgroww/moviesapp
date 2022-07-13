@@ -28,20 +28,20 @@ class DetailsViewModel(private val repository: MovieRepository, val movie: Movie
 
     init {
         _movieDetail.value = MovieDetail()
-        getMovieDetails()
+//        getMovieDetails()
     }
 
-    private fun getMovieDetails() {
-        _networkStatus.value = NetworkResult.Loading
-        viewModelScope.launch (Dispatchers.IO) {
-            val networkResult = async { repository.getMovieDetails(movie.id.toLong()) }
-            val result = networkResult.await()
-            if(result is NetworkResult.Success<*>) {
-                setSuccessData(result.content)
-            }
-            _networkStatus.postValue(result)
-        }
-    }
+//    private fun getMovieDetails() {
+//        _networkStatus.value = NetworkResult.Loading
+//        viewModelScope.launch (Dispatchers.IO) {
+//            val networkResult = async { repository.getMovieDetails(movie.id.toLong()) }
+//            val result = networkResult.await()
+//            if(result is NetworkResult.Success<*>) {
+//                setSuccessData(result.content)
+//            }
+//            _networkStatus.postValue(result)
+//        }
+//    }
 
     private fun setSuccessData(content: Any?) {
         content?.let {
