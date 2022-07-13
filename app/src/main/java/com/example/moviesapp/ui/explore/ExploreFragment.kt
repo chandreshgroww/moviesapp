@@ -44,12 +44,21 @@ class ExploreFragment : Fragment() {
 
         initializeAdapter()
 
+        initializeClickListeners()
+
         return binding.root
+    }
+
+    private fun initializeClickListeners() {
+        binding.exploreBackArrow.setOnClickListener {
+            this.findNavController().popBackStack()
+        }
     }
 
     private fun initializeAdapter() {
         val adapter = MovieHorizontalAdapter(MovieClickListener {
-            this.findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToDetailsFragment(it))
+            this.findNavController()
+                .navigate(ExploreFragmentDirections.actionExploreFragmentToDetailsFragment(it))
         })
 
         binding.moviesListRecyclerView.apply {

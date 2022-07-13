@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.*
 import com.example.moviesapp.database.LocalDatabase
 import com.example.moviesapp.models.Movie
+import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.paging.MoviePagingSource
 import com.example.moviesapp.util.Result
@@ -17,13 +18,13 @@ class MovieRepository @Inject constructor(private val remoteDataSource: RemoteDa
 
     val popularMovieList: LiveData<Result<List<Movie>>> = resultLiveData(
         databaseQuery = { localDatabase.getDatabaseDao().getPopularMovieList() },
-        networkCall = { remoteDataSource.fetchPopularList(SortBy.PopularityDesc) },
+        networkCall = { remoteDataSource.fetchMoviesList(SortBy.PopularityDesc) },
         saveCallResult = { localDatabase.getDatabaseDao().addMovieList(it.results) }
     )
 
     val viewCountMovieList = resultLiveData(
         databaseQuery = { localDatabase.getDatabaseDao().getVoteCountMovieList() },
-        networkCall = { remoteDataSource.fetchPopularList(SortBy.VoteCount) },
+        networkCall = { remoteDataSource.fetchMoviesList(SortBy.VoteCount) },
         saveCallResult = { localDatabase.getDatabaseDao().addMovieList(it.results) }
     )
 
@@ -31,5 +32,7 @@ class MovieRepository @Inject constructor(private val remoteDataSource: RemoteDa
         config = PagingConfig(pageSize = 20, enablePlaceholders = true, maxSize = 200),
         pagingSourceFactory = { MoviePagingSource(remoteDataSource) }
     ).liveData
+
+    suspend fun movieDetail(movieId: Int): Result<MovieDetail> = remoteDataSource.fetchMovieDetail(movieId)
 
 }

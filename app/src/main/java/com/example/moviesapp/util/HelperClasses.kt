@@ -14,15 +14,6 @@ enum class SortBy(val notation: String) {
     VoteCount("vote_count.desc")
 }
 
-//sealed class NetworkResult<T>(
-//    val data: T? = null,
-//    val message: String? = null
-//) {
-//    class Success<T>(data: T) : NetworkResult<T>(data)
-//    class Error<T>(message: String?, data: T? = null) : NetworkResult<T>(data, message)
-//    class Loading<T> : NetworkResult<T>()
-//}
-
 sealed class NetworkResult {
     object Loading: NetworkResult()
     data class Error(val errorMessage: String?): NetworkResult()
@@ -86,7 +77,6 @@ abstract class BaseDataSource {
     }
 
     private fun <T> error(message: String): Result<T> {
-        Log.i(TAG, "error: $message")
         return Result.error("Network call has failed for a following reason: $message")
     }
 

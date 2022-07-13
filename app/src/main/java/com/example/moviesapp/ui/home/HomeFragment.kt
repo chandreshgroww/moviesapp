@@ -14,6 +14,7 @@ import com.example.moviesapp.adapter.MovieListAdapter
 import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.databinding.FragmentHomeBinding
 import com.example.moviesapp.util.Result
+import com.example.moviesapp.util.SortBy
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -41,7 +42,16 @@ class HomeFragment : Fragment() {
 
         initializeAdapters()
 
+        initializeClickListeners()
+
         return binding.root
+    }
+
+    private fun initializeClickListeners() {
+        binding.seeMorePopular.setOnClickListener {
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment())
+        }
     }
 
     private fun initializeAdapters() {
@@ -52,7 +62,8 @@ class HomeFragment : Fragment() {
         binding.nowShowingRecyclerView.adapter = verticalAdapter
 
         val horizontalAdapter = MovieListAdapter(1, MovieClickListener {
-            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it))
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it))
         })
         binding.popularRecyclerView.adapter = horizontalAdapter
 

@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="Error"
+                    showOnError="@{viewModel.voteCountMovieList}"
                     android:textColor="@android:color/holo_red_dark"
                     android:layout_weight="0.05"/>
 
@@ -62,6 +63,7 @@
                     android:layout_width="25dp"
                     android:textAlignment="viewEnd"
                     android:foregroundGravity="right"
+                    app:showOnLoading="@{viewModel.voteCountMovieList}"
                     android:layout_height="25dp"
                     android:layout_weight="0.05"/>
 
@@ -125,13 +127,22 @@
                 <TextView
                     android:id="@+id/recent_interview_textView"
                     style="@style/bg_heading.margins"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:text="Popular"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/now_showing_recyclerView" />
+
+                <TextView
+                    android:id="@+id/see_more_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See More"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recent_interview_textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recent_interview_textView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/popular_recyclerView"
