@@ -9,12 +9,13 @@ import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.paging.MoviePagingSource
 import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
-import com.example.moviesapp.util.resultLiveData
 import javax.inject.Inject
 
-private const val TAG = "MovieRepository"
 
-class MovieRepository @Inject constructor(private val remoteDataSource: RemoteDataSource, private val localDatabase: LocalDatabase) {
+class MovieRepository @Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDatabase: LocalDatabase
+) {
 
     val popularMovieList: LiveData<Result<List<Movie>>> = resultLiveData(
         databaseQuery = { localDatabase.getDatabaseDao().getPopularMovieList() },
@@ -33,6 +34,7 @@ class MovieRepository @Inject constructor(private val remoteDataSource: RemoteDa
         pagingSourceFactory = { MoviePagingSource(remoteDataSource) }
     ).liveData
 
-    suspend fun movieDetail(movieId: Int): Result<MovieDetail> = remoteDataSource.fetchMovieDetail(movieId)
+    suspend fun movieDetail(movieId: Int): Result<MovieDetail> =
+        remoteDataSource.fetchMovieDetail(movieId)
 
 }

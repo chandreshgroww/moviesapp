@@ -1,20 +1,14 @@
 package com.example.moviesapp.ui.details
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.repository.MovieRepository
-import com.example.moviesapp.ui.home.HomeViewModel
-import com.example.moviesapp.util.NetworkResult
 import com.example.moviesapp.util.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
-import javax.inject.Inject
-
-private const val TAG = "DetailsViewModel"
 
 class DetailsViewModel(private val repository: MovieRepository, val movie: Movie): ViewModel() {
 

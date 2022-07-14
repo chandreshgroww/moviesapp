@@ -16,8 +16,6 @@ import com.example.moviesapp.util.Result
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-private const val TAG = "DetailsFragment"
-
 class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
@@ -30,7 +28,7 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailsBinding.inflate(inflater)
         (activity?.application as MainApplication).applicationComponent.injectDetails(this)
 

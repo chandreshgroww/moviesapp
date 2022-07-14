@@ -13,7 +13,6 @@
             name="movie"
             type="com.example.moviesapp.models.MovieDetail" />
 
-        <import type="com.example.moviesapp.util.NetworkResult" />
     </data>
 
     <ScrollView

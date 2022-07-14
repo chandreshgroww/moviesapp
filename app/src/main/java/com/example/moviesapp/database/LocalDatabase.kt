@@ -1,6 +1,5 @@
 package com.example.moviesapp.database
 
-import android.content.Context
 import androidx.room.*
 import com.example.moviesapp.models.Movie
 

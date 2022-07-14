@@ -9,16 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.moviesapp.MainApplication
-import com.example.moviesapp.adapter.MovieHorizontalAdapter
 import com.example.moviesapp.adapter.MovieListAdapter
 import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.databinding.FragmentHomeBinding
+import com.example.moviesapp.ui.MainViewModelFactory
 import com.example.moviesapp.util.Result
-import com.example.moviesapp.util.SortBy
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
-
-private const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
 
@@ -26,7 +23,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
 
     @Inject
-    lateinit var homeViewModelFactory: MainViewModelFactory
+    lateinit var mainViewModelFactory: MainViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +33,7 @@ class HomeFragment : Fragment() {
 
         (activity?.application as MainApplication).applicationComponent.injectHome(this)
 
-        viewModel = ViewModelProvider(this, homeViewModelFactory)[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, mainViewModelFactory)[HomeViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

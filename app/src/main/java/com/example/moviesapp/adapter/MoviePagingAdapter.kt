@@ -3,14 +3,12 @@ package com.example.moviesapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.databinding.MovieHorizontalCardBinding
 import com.example.moviesapp.models.Movie
 
-class MovieHorizontalAdapter(private val movieClickListener: MovieClickListener) :
-    PagingDataAdapter<Movie, MovieHorizontalAdapter.ViewHolder>(MovieDiffCallback()) {
+class MoviePagingAdapter(private val movieClickListener: MovieClickListener) :
+    PagingDataAdapter<Movie, MoviePagingAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -20,7 +18,7 @@ class MovieHorizontalAdapter(private val movieClickListener: MovieClickListener)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MovieHorizontalAdapter.ViewHolder {
+    ): MoviePagingAdapter.ViewHolder {
         return ViewHolder.from(parent)
     }
 

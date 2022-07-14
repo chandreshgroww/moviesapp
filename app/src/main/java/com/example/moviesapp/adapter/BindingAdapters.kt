@@ -1,32 +1,22 @@
 package com.example.moviesapp.adapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.moviesapp.R
-import com.example.moviesapp.models.Genre
-import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
-import com.example.moviesapp.util.NetworkResult
 import com.example.moviesapp.util.Result
-
-private const val TAG = "BindingAdapters"
 
 @BindingAdapter("bindImage")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-        Log.d(TAG, "bindImage: $imgUrl")
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
             .load(imgUri)
@@ -49,7 +39,6 @@ fun ViewGroup.hideOnLoading(result: Result<*>?) {
 
 @BindingAdapter("showOnLoading")
 fun ProgressBar.showOnLoading(result: Result<*>?) {
-    Log.i(TAG, "showOnLoading: $result")
     visibility = if(result == null) {
         View.VISIBLE
     }
@@ -63,7 +52,6 @@ fun ProgressBar.showOnLoading(result: Result<*>?) {
 
 @BindingAdapter("showOnError")
 fun TextView.showError(result: Result<*>?) {
-    Log.i(TAG, "showError: $result $result")
     visibility = if (result?.status == Result.Status.ERROR) {
         text = result.message
         View.VISIBLE
@@ -78,9 +66,7 @@ fun addChipTextView(linearLayout: LinearLayout, movie: Result<MovieDetail>?) {
     linearLayout.removeAllViews()
     if(movie?.status == Result.Status.SUCCESS && movie.data != null) {
         movie.data.genres.let {
-            Log.i(TAG, "addChipTextView: ${it}")
             it?.forEach { tag ->
-                Log.i(TAG, "addChipTextView: $tag")
                 if (tag.name.isNotEmpty()) {
                     val textView = TextView(linearLayout.context)
                     textView.text = tag.name

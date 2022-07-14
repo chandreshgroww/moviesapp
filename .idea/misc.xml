@@ -7,7 +7,7 @@
         <entry key="app/src/main/res/drawable/chip_bg.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/movie_card_bg.xml" value="0.108" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2229440790855946" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.21539660969368207" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.17743394639756938" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2138671875" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.24003623188405798" />
