@@ -9,7 +9,7 @@ import com.example.moviesapp.util.SortBy
 interface DatabaseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addMovieList(movieList: List<Movie>?)
+    suspend fun addMovieList(movieList: List<Movie>)
 
     @Query("SELECT * FROM all_movies ORDER BY popularity DESC LIMIT 20")
     fun getPopularMovieList(): LiveData<List<Movie>>

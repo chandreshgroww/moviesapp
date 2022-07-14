@@ -2,6 +2,7 @@ package com.example.moviesapp.di
 
 import androidx.lifecycle.ViewModel
 import com.example.moviesapp.ui.details.DetailsViewModel
+import com.example.moviesapp.ui.explore.ExploreViewModel
 import com.example.moviesapp.ui.home.HomeViewModel
 import dagger.Binds
 import dagger.Module
@@ -17,8 +18,8 @@ abstract class ViewModelModule {
     @IntoMap
     abstract fun mainViewModel(homeViewModel: HomeViewModel): ViewModel
 
-//    @Binds
-//    @ClassKey(DetailsViewModel::class)
-//    @IntoMap
-//    abstract fun detailsViewModel(detailsViewModel: DetailsViewModel): ViewModel
+    @Binds
+    @ClassKey(ExploreViewModel::class)
+    @IntoMap
+    abstract fun exploreViewModel(exploreViewModel: ExploreViewModel): ViewModel
 }

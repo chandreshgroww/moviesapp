@@ -1,8 +1,11 @@
 package com.example.moviesapp.network
 
+import androidx.lifecycle.LiveData
 import com.example.moviesapp.models.DiscoverResult
+import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.util.Constants
+import com.example.moviesapp.util.Result
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -18,12 +21,13 @@ interface ApiService {
     @GET("/3/discover/movie")
     suspend fun getMovieListAsync(
         @Query("sort_by") sort_by: String,
+        @Query("page") page: Int = 1,
         @Query("api_key") api_key: String = Constants.apiKey
     ): Response<DiscoverResult>
 
     @GET("/3/movie/{movieId}")
     suspend fun getMovieDetails(
-        @Path("movieId") movieId: Long = -1,
+        @Path("movieId") movieId: Int = -1,
         @Query("api_key") api_key: String = Constants.apiKey
     ): Response<MovieDetail>
 

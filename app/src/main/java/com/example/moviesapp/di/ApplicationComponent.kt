@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.moviesapp.MainActivity
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.ui.details.DetailsFragment
+import com.example.moviesapp.ui.explore.ExploreFragment
 import com.example.moviesapp.ui.home.HomeFragment
 import dagger.Binds
 import dagger.BindsInstance
@@ -19,6 +20,8 @@ interface ApplicationComponent {
     fun injectHome(fragment: HomeFragment)
 
     fun injectDetails(fragment: DetailsFragment)
+
+    fun injectExplore(fragment: ExploreFragment)
 
     fun getMap(): Map<Class<*>, ViewModel>
 

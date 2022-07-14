@@ -7,6 +7,7 @@ import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.repository.MovieRepository
 import com.example.moviesapp.ui.home.HomeViewModel
 import com.example.moviesapp.util.NetworkResult
+import com.example.moviesapp.util.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -17,38 +18,22 @@ private const val TAG = "DetailsViewModel"
 
 class DetailsViewModel(private val repository: MovieRepository, val movie: Movie): ViewModel() {
 
-    private val _networkStatus = MutableLiveData<NetworkResult>()
-    val networkStatus: LiveData<NetworkResult>
-        get() = _networkStatus
-
-    private val _movieDetail = MutableLiveData<MovieDetail>()
-    val movieDetail: LiveData<MovieDetail>
+    private val _movieDetail = MutableLiveData<Result<MovieDetail>>()
+    val movieDetail: LiveData<Result<MovieDetail>>
         get() = _movieDetail
 
 
     init {
-        _movieDetail.value = MovieDetail()
-        getMovieDetails()
-    }
-
-    private fun getMovieDetails() {
-        _networkStatus.value = NetworkResult.Loading
-        viewModelScope.launch (Dispatchers.IO) {
-            val networkResult = async { repository.getMovieDetails(movie.id.toLong()) }
-            val result = networkResult.await()
-            if(result is NetworkResult.Success<*>) {
-                setSuccessData(result.content)
-            }
-            _networkStatus.postValue(result)
+        viewModelScope.launch {
+            getMovieDetails()
         }
     }
 
-    private fun setSuccessData(content: Any?) {
-        content?.let {
-            if(it is MovieDetail) {
-                _movieDetail.postValue(it)
-            }
+    private suspend fun getMovieDetails() {
+        val movieDetail = viewModelScope.async(Dispatchers.IO) {
+            movie.id?.let { repository.movieDetail(it) }
         }
+        _movieDetail.postValue(movieDetail.await())
     }
 
 }
