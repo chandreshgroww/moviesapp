@@ -21,6 +21,7 @@ interface ApiService {
     @GET("/3/discover/movie")
     suspend fun getMovieListAsync(
         @Query("sort_by") sort_by: String,
+        @Query("with_genres") with_genres: String ?= null,
         @Query("page") page: Int = 1,
         @Query("api_key") api_key: String = Constants.apiKey
     ): Response<DiscoverResult>

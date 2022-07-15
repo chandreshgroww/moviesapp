@@ -1,5 +1,6 @@
 package com.example.moviesapp.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.moviesapp.models.Movie
@@ -8,13 +9,19 @@ import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
 
-class MoviePagingSource(private val remoteDataSource: RemoteDataSource) :
+private const val TAG = "MoviePagingSource"
+
+class MoviePagingSource(
+    private val remoteDataSource: RemoteDataSource,
+    private val sortBy: SortBy,
+    private val withGenres: String
+) :
     PagingSource<Int, Movie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         return try {
             val position = params.key ?: 1
-            val response = remoteDataSource.fetchMoviesList(SortBy.VoteCount, position)
+            val response = remoteDataSource.fetchMoviesList(sortBy, withGenres, position)
 
             if (response.status == Result.Status.SUCCESS && response.data != null) {
                 LoadResult.Page(

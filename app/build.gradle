@@ -37,11 +37,14 @@ android {
     }
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 
 dependencies {
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     def nav_version = "2.5.0"
     def lifecycle_version = "2.5.0"
 

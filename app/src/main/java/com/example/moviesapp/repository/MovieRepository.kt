@@ -25,13 +25,13 @@ class MovieRepository @Inject constructor(
 
     val viewCountMovieList = resultLiveData(
         databaseQuery = { localDatabase.getDatabaseDao().getVoteCountMovieList() },
-        networkCall = { remoteDataSource.fetchMoviesList(SortBy.VoteCount) },
+        networkCall = { remoteDataSource.fetchMoviesList(SortBy.VoteCountDesc) },
         saveCallResult = { localDatabase.getDatabaseDao().addMovieList(it.results) }
     )
 
-    fun getVoteCountMovies(): LiveData<PagingData<Movie>> = Pager(
-        config = PagingConfig(pageSize = 20, enablePlaceholders = true, maxSize = 200),
-        pagingSourceFactory = { MoviePagingSource(remoteDataSource) }
+    fun getVoteCountMovies(sortBy: SortBy, withGenre: String): LiveData<PagingData<Movie>> = Pager(
+        config = PagingConfig(pageSize = 5, maxSize = 200),
+        pagingSourceFactory = { MoviePagingSource(remoteDataSource, sortBy, withGenre) }
     ).liveData
 
     suspend fun movieDetail(movieId: Int): Result<MovieDetail> =
