@@ -19,21 +19,25 @@ class MoviePagingSource(
     PagingSource<Int, Movie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+        Log.i(TAG, "load: Inside paging load")
         return try {
             val position = params.key ?: 1
             val response = remoteDataSource.fetchMoviesList(sortBy, withGenres, position)
 
             if (response.status == Result.Status.SUCCESS && response.data != null) {
+                Log.i(TAG, "load: ${response.data.results}")
                 LoadResult.Page(
                     data = response.data.results,
                     prevKey = if (position == 1) null else (position - 1),
                     nextKey = if (position == response.data.total_pages) null else (position + 1)
                 )
             } else {
+                Log.i(TAG, "load: No Response")
                 LoadResult.Error(throw Exception("No Response"))
             }
 
         } catch (e: Exception) {
+            Log.i(TAG, "load: $e")
             LoadResult.Error(e)
         }
     }

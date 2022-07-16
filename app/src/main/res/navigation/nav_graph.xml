@@ -25,6 +25,10 @@
         <action
             android:id="@+id/action_exploreFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <argument
+            android:name="sortBy"
+            app:argType="com.example.moviesapp.util.SortBy"
+            android:defaultValue="PopularityDesc" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

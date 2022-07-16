@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="sortFilter"
+            type="com.example.moviesapp.models.SortFilter" />
+
+        <variable
+            name="clickListener"
+            type="com.example.moviesapp.adapter.SortFilterClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> clickListener.onClick(sortFilter)}">
+
+        <TextView
+            android:id="@+id/sort_filter_textView"
+            style="@style/title_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:paddingLeft="@dimen/list_item_spacing"
+            android:paddingTop="@dimen/list_item_spacing_half"
+            android:paddingRight="@dimen/list_item_spacing"
+            android:paddingBottom="@dimen/list_item_spacing_half"
+            android:text="@{sortFilter.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Popularity" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_check_24"
+            android:visibility="@{sortFilter.isSelected ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/sort_filter_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sort_filter_textView"
+            app:tint="#3082F2" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sort_filter_textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

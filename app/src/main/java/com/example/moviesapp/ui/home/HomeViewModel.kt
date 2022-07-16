@@ -10,6 +10,8 @@ class HomeViewModel @Inject constructor(repository: MovieRepository) : ViewModel
 
     val voteCountMovieList = repository.viewCountMovieList
 
+    val genreList = repository.genreMovieList
+
 }
 
 

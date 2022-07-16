@@ -6,18 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviesapp.MainApplication
 import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.adapter.MoviePagingAdapter
 import com.example.moviesapp.databinding.FragmentExploreBinding
-import com.example.moviesapp.models.Genre
+import com.example.moviesapp.models.SortFilter
 import com.example.moviesapp.paging.LoaderAdapter
 import com.example.moviesapp.ui.MainViewModelFactory
+import com.example.moviesapp.util.SortBy
 import javax.inject.Inject
 
 private const val TAG = "ExploreFragment"
@@ -26,6 +28,8 @@ class ExploreFragment : Fragment() {
 
     lateinit var viewModel: ExploreViewModel
     lateinit var binding: FragmentExploreBinding
+
+    private val args: ExploreFragmentArgs by navArgs()
 
     @Inject
     lateinit var mainViewModelFactory: MainViewModelFactory
@@ -49,10 +53,7 @@ class ExploreFragment : Fragment() {
 
         initializeClickListeners()
 
-        binding.bottomFilterButton.setOnClickListener {
-            viewModel.filterMovies(35)
-            viewModel.filterMovies(14)
-        }
+        viewModel.sortMovies(SortFilter(-1, args.sortBy.displayName, args.sortBy.notation, false))
 
         return binding.root
     }
@@ -60,6 +61,14 @@ class ExploreFragment : Fragment() {
     private fun initializeClickListeners() {
         binding.exploreBackArrow.setOnClickListener {
             this.findNavController().popBackStack()
+        }
+
+        binding.bottomSortButton.setOnClickListener {
+            BottomListDialogFragment(viewModel).show(childFragmentManager, SORT)
+        }
+
+        binding.bottomFilterButton.setOnClickListener {
+            BottomListDialogFragment(viewModel).show(childFragmentManager, FILTER)
         }
     }
 
@@ -83,6 +92,11 @@ class ExploreFragment : Fragment() {
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             }
         })
+    }
+
+    companion object {
+        const val SORT = "sort"
+        const val FILTER = "filter"
     }
 
 }

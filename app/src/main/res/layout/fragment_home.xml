@@ -100,14 +100,25 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/dream_companies_textView"
+                    android:id="@+id/now_showing_textView"
                     style="@style/bg_heading.margins"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Now Showing"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/see_more_now_showing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See More"
+                    android:textSize="12dp"
+                    android:background="@drawable/sea_more_bg"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/now_showing_textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/now_showing_textView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/now_showing_recyclerView"
@@ -120,7 +131,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dream_companies_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/now_showing_textView"
                     app:spanCount="3"
                     tools:listitem="@layout/movie_vertical_card" />
 
@@ -139,6 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See More"
+                    android:textSize="12dp"
+                    android:background="@drawable/sea_more_bg"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/recent_interview_textView"
                     app:layout_constraintEnd_toEndOf="parent"
