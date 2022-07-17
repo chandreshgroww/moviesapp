@@ -6,16 +6,20 @@
         <entry key="app/src/main/res/drawable/cards_bg.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/chip_bg.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/movie_card_bg.xml" value="0.108" />
+        <entry key="app/src/main/res/drawable/sea_more_bg.xml" value="0.131" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2229440790855946" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.17743394639756938" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2138671875" />
+        <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.22226579454210066" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.29562530517578123" />
+        <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/movie_horizontal_card.xml" value="0.28430879455459135" />
         <entry key="app/src/main/res/layout/movie_vertical_card.xml" value="0.3036498201252352" />
         <entry key="app/src/main/res/layout/movies_horizontal_card.xml" value="0.27071685791015626" />
         <entry key="app/src/main/res/layout/movies_vertical_cards.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/network_loader.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/sort_filter_dialog.xml" value="0.20606884057971014" />
+        <entry key="app/src/main/res/layout/sort_filter_dialog_item.xml" value="0.15084140989110303" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.3171875" />
       </map>
     </option>

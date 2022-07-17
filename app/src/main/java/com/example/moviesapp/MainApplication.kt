@@ -12,7 +12,6 @@ import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
 
 class MainApplication: Application() {
 
-    lateinit var movieRepository: MovieRepository
     lateinit var applicationComponent: ApplicationComponent
 
     override fun onCreate() {

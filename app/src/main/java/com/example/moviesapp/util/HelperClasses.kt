@@ -1,8 +1,10 @@
 package com.example.moviesapp.util
 
-enum class SortBy(val notation: String) {
-    PopularityDesc("popularity.desc"),
-    VoteCount("vote_count.desc")
+enum class SortBy(val notation: String, val displayName: String) {
+    PopularityDesc("popularity.desc", "Popularity"),
+    VoteCountDesc("vote_count.desc", "Vote Count"),
+    ReleaseDateDesc("release_date.desc", "Release Date"),
+    RevenueDesc("revenue.desc", "Revenue")
 }
 
 data class Result<out T>(val status: Status, val data: T?, val message: String?) {

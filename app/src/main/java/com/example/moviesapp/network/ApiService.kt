@@ -2,6 +2,7 @@ package com.example.moviesapp.network
 
 import androidx.lifecycle.LiveData
 import com.example.moviesapp.models.DiscoverResult
+import com.example.moviesapp.models.GenreResult
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.util.Constants
@@ -21,6 +22,7 @@ interface ApiService {
     @GET("/3/discover/movie")
     suspend fun getMovieListAsync(
         @Query("sort_by") sort_by: String,
+        @Query("with_genres") with_genres: String ?= null,
         @Query("page") page: Int = 1,
         @Query("api_key") api_key: String = Constants.apiKey
     ): Response<DiscoverResult>
@@ -30,5 +32,10 @@ interface ApiService {
         @Path("movieId") movieId: Int = -1,
         @Query("api_key") api_key: String = Constants.apiKey
     ): Response<MovieDetail>
+
+    @GET("/3/genre/movie/list")
+    suspend fun getAllGenreList(
+        @Query("api_key") api_key: String = Constants.apiKey
+    ): Response<GenreResult>
 
 }

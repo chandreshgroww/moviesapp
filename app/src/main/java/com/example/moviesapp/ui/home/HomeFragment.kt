@@ -14,6 +14,7 @@ import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.databinding.FragmentHomeBinding
 import com.example.moviesapp.ui.MainViewModelFactory
 import com.example.moviesapp.util.Result
+import com.example.moviesapp.util.SortBy
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -47,7 +48,12 @@ class HomeFragment : Fragment() {
     private fun initializeClickListeners() {
         binding.seeMorePopular.setOnClickListener {
             this.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment())
+                .navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment(SortBy.VoteCountDesc))
+        }
+
+        binding.seeMoreNowShowing.setOnClickListener {
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment(SortBy.PopularityDesc))
         }
     }
 
