@@ -12,8 +12,11 @@ import javax.inject.Inject
 
 private const val TAG = "ExploreViewModel"
 
-class ExploreViewModel @Inject constructor(private val repository: MovieRepository) : ViewModel() {
-
+class ExploreViewModel @Inject constructor(
+    private val repository: MovieRepository,
+    private val sortByParam: SortBy
+) : ViewModel() {
+    
     private val _sortFilterQuery = MutableLiveData<QueryParams>()
     val sortFilterQuery: LiveData<QueryParams>
         get() = _sortFilterQuery
@@ -43,9 +46,12 @@ class ExploreViewModel @Inject constructor(private val repository: MovieReposito
     private fun initializeSortByList() {
         enumValues<SortBy>().forEach {
             val queryParam = SortFilter(-1, it.displayName, it.notation, false)
+            if(sortByParam.notation == queryParam.idString)
+                queryParam.isSelected = true
             sortByList.add(queryParam)
         }
-        _sortFilterQuery.value?.sortBy = sortByList
+        if(_sortFilterQuery.value?.sortBy.isNullOrEmpty())
+            _sortFilterQuery.value?.sortBy = sortByList
     }
 
     fun initializeGenreList(genreList: List<SortFilter>) {

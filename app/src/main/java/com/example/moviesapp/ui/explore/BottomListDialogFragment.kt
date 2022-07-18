@@ -20,17 +20,6 @@ import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
 import javax.inject.Inject
 
-const val ARG_ITEM_COUNT = "item_count"
-
-/**
- *
- * A fragment that shows a list of items as a modal bottom sheet.
- *
- * You can show this modal bottom sheet from your activity like this:
- * <pre>
- *    BottomListListDialogFragment.newInstance(30).show(supportFragmentManager, "dialog")
- * </pre>
- */
 class BottomListDialogFragment(val viewModel: ExploreViewModel) :
     BottomSheetDialogFragment() {
 
@@ -40,21 +29,12 @@ class BottomListDialogFragment(val viewModel: ExploreViewModel) :
     // onDestroyView.
     private val binding get() = _binding!!
 
-//    @Inject
-//    lateinit var mainViewModelFactory: MainViewModelFactory
-//
-//    private lateinit var viewModel: ExploreViewModel by viewModels {  }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         _binding = SortFilterDialogBinding.inflate(inflater, container, false)
-
-//        (activity?.application as MainApplication).applicationComponent.injectBottomSheetFragment(this)
-//
-//        viewModel = ViewModelProvider(this, mainViewModelFactory)[ExploreViewModel::class.java]
 
         when(tag) {
             ExploreFragment.SORT -> addSortAdapter()
@@ -63,9 +43,6 @@ class BottomListDialogFragment(val viewModel: ExploreViewModel) :
 
         return binding.root
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     private fun addFilterAdapter() {

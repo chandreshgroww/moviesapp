@@ -38,7 +38,7 @@ class MovieRepository @Inject constructor(
     )
 
     fun getVoteCountMovies(sortBy: SortBy, withGenre: String): LiveData<PagingData<Movie>> = Pager(
-        config = PagingConfig(pageSize = 5, maxSize = 200),
+        config = PagingConfig(pageSize = 10, maxSize = 200),
         pagingSourceFactory = { MoviePagingSource(remoteDataSource, sortBy, withGenre) }
     ).liveData
 

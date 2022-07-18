@@ -15,18 +15,21 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class, DatabaseModule::class, ViewModelModule::class])
+@Component(
+    modules = [NetworkModule::class, DatabaseModule::class,
+        SubComponentModule::class, ViewModelModule::class]
+)
 interface ApplicationComponent {
 
     fun injectHome(fragment: HomeFragment)
 
     fun injectDetails(fragment: DetailsFragment)
 
-    fun injectExplore(fragment: ExploreFragment)
-
     fun injectBottomSheetFragment(fragment: BottomListDialogFragment)
 
     fun getMap(): Map<Class<*>, ViewModel>
+
+    fun exploreComponent(): ExploreSubComponent.Factory
 
     @Component.Factory
     interface Factory {

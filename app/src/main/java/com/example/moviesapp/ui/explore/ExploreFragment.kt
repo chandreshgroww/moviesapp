@@ -12,6 +12,7 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.MainApplication
 import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.adapter.MoviePagingAdapter
@@ -41,7 +42,8 @@ class ExploreFragment : Fragment() {
 
         binding = FragmentExploreBinding.inflate(inflater)
 
-        (activity?.application as MainApplication).applicationComponent.injectExplore(this)
+        val exploreComponent = (activity?.application as MainApplication).applicationComponent.exploreComponent().create(args.sortBy)
+        exploreComponent.inject(this)
 
         viewModel = ViewModelProvider(this, mainViewModelFactory)[ExploreViewModel::class.java]
 
@@ -52,8 +54,6 @@ class ExploreFragment : Fragment() {
         initializeAdapter()
 
         initializeClickListeners()
-
-        viewModel.sortMovies(SortFilter(-1, args.sortBy.displayName, args.sortBy.notation, false))
 
         return binding.root
     }
@@ -77,6 +77,9 @@ class ExploreFragment : Fragment() {
             this.findNavController()
                 .navigate(ExploreFragmentDirections.actionExploreFragmentToDetailsFragment(it))
         })
+
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         binding.moviesListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
