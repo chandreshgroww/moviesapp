@@ -5,12 +5,13 @@ import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.repository.MovieRepository
 import com.example.moviesapp.util.Result
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
-class DetailsViewModel(private val repository: MovieRepository, val movie: Movie): ViewModel() {
+class DetailsViewModel(private val repository: MovieRepository, val movie: Movie) : ViewModel() {
 
     private val _movieDetail = MutableLiveData<Result<MovieDetail>>()
     val movieDetail: LiveData<Result<MovieDetail>>
@@ -18,16 +19,13 @@ class DetailsViewModel(private val repository: MovieRepository, val movie: Movie
 
 
     init {
-        viewModelScope.launch {
-            getMovieDetails()
-        }
+        getMovieDetails()
     }
 
-    private suspend fun getMovieDetails() {
-        val movieDetail = viewModelScope.async(Dispatchers.IO) {
-            movie.id?.let { repository.movieDetail(it) }
+    fun getMovieDetails() {
+        viewModelScope.launch {
+            _movieDetail.postValue( repository.movieDetail(movie.id) )
         }
-        _movieDetail.postValue(movieDetail.await())
     }
 
 }

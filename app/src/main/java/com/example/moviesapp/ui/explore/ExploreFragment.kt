@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.MainApplication
@@ -21,6 +22,7 @@ import com.example.moviesapp.models.SortFilter
 import com.example.moviesapp.paging.LoaderAdapter
 import com.example.moviesapp.ui.MainViewModelFactory
 import com.example.moviesapp.util.SortBy
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 private const val TAG = "ExploreFragment"
@@ -89,6 +91,18 @@ class ExploreFragment : Fragment() {
                 footer = LoaderAdapter()
             )
         }
+
+//        adapter.loadStateFlow.collectLatest { loadState ->
+//            when (val currentState = loadState.refresh) {
+//                is LoadState.Loading -> {
+//
+//                }
+//                is LoadState.Error -> {
+//                    val extractedException = currentState.error // SomeCatchableException
+//
+//                }
+//            }
+//        }
 
         viewModel.moviesList.observe(viewLifecycleOwner, Observer {
             it?.let {

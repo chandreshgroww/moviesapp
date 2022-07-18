@@ -1,12 +1,12 @@
 package com.example.moviesapp.ui.explore
 
-import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.QueryParams
 import com.example.moviesapp.models.SortFilter
 import com.example.moviesapp.repository.MovieRepository
-import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ class ExploreViewModel @Inject constructor(
     private val repository: MovieRepository,
     private val sortByParam: SortBy
 ) : ViewModel() {
-    
+
     private val _sortFilterQuery = MutableLiveData<QueryParams>()
     val sortFilterQuery: LiveData<QueryParams>
         get() = _sortFilterQuery
@@ -25,11 +25,12 @@ class ExploreViewModel @Inject constructor(
 
     private val sortByList = mutableListOf<SortFilter>()
 
-    val moviesList = _sortFilterQuery.switchMap {
+    val moviesList: LiveData<PagingData<Movie>> = _sortFilterQuery.switchMap {
         it?.let { queryParam ->
             val genreParams = getGenreParams(queryParam)
             val sortByParams = getSortParams(queryParam)
-            repository.getVoteCountMovies(sortByParams, genreParams).cachedIn(viewModelScope)
+            repository.getVoteCountMovies(sortByParams, genreParams)
+                .cachedIn(viewModelScope)
         }
     }
 
@@ -46,11 +47,11 @@ class ExploreViewModel @Inject constructor(
     private fun initializeSortByList() {
         enumValues<SortBy>().forEach {
             val queryParam = SortFilter(-1, it.displayName, it.notation, false)
-            if(sortByParam.notation == queryParam.idString)
+            if (sortByParam.notation == queryParam.idString)
                 queryParam.isSelected = true
             sortByList.add(queryParam)
         }
-        if(_sortFilterQuery.value?.sortBy.isNullOrEmpty())
+        if (_sortFilterQuery.value?.sortBy.isNullOrEmpty())
             _sortFilterQuery.value?.sortBy = sortByList
     }
 

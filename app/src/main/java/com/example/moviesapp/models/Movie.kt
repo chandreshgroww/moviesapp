@@ -10,14 +10,14 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "all_movies")
 data class Movie(
     @PrimaryKey
-    val id: Int ?,
-    val adult: Boolean?,
-    val backdrop_path: String?,
-    val overview: String?,
-    val popularity: Double?,
-    val poster_path: String?,
-    val release_date: String?,
-    val title: String?,
-    val vote_average: Double?,
-    val vote_count: Int?
+    val id: Int = -1,
+    val adult: Boolean?=null,
+    val backdrop_path: String?=null,
+    val overview: String?=null,
+    val popularity: Double?=null,
+    val poster_path: String?=null,
+    val release_date: String?=null,
+    val title: String?=null,
+    val vote_average: Double?=null,
+    val vote_count: Int?=null
 ): Parcelable
