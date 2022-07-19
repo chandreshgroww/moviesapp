@@ -1,10 +1,13 @@
 package com.example.moviesapp.di
 
 import com.example.moviesapp.network.ApiService
+import com.example.moviesapp.network.IRemoteDataSource
+import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.util.Constants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

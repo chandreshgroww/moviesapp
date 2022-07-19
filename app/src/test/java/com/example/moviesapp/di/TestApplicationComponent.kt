@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.example.moviesapp.MainActivity
 import com.example.moviesapp.models.Movie
+import com.example.moviesapp.repository.MovieRepositoryTest
 import com.example.moviesapp.ui.details.DetailsFragment
 import com.example.moviesapp.ui.explore.BottomListDialogFragment
 import com.example.moviesapp.ui.explore.ExploreFragment
@@ -16,23 +17,14 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [NetworkModule::class, DatabaseModule::class,
-        SubComponentModule::class, ViewModelModule::class, InterfaceModule::class]
+    modules = [TestNetworkModule::class, TestDatabaseModule::class]
 )
-interface ApplicationComponent {
+interface TestApplicationComponent: ApplicationComponent{
 
-    fun injectHome(fragment: HomeFragment)
-
-    fun injectDetails(fragment: DetailsFragment)
-
-    fun injectBottomSheetFragment(fragment: BottomListDialogFragment)
-
-    fun getMap(): Map<Class<*>, ViewModel>
-
-    fun exploreComponent(): ExploreSubComponent.Factory
+    fun inject(repositoryTest: MovieRepositoryTest)
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance context: Context): ApplicationComponent
+        fun create(@BindsInstance context: Context): TestApplicationComponent
     }
 }

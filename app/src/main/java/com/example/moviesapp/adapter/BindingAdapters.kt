@@ -56,7 +56,6 @@ fun TextView.showError(result: Result<*>?) {
         text = result.message
         View.VISIBLE
     }
-
     else
         View.GONE
 }

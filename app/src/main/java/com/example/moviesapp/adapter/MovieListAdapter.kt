@@ -22,7 +22,7 @@ class MovieListAdapter(private val type: Int, private val movieClickListener: Mo
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MovieListAdapter.ViewHolder {
+    ): ViewHolder {
         return when(type) {
             0 -> ViewHolder.fromVertical(parent)
             else -> ViewHolder.fromHorizontal(parent)

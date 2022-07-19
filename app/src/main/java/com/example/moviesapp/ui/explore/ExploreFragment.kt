@@ -6,20 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.MainApplication
 import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.adapter.MoviePagingAdapter
 import com.example.moviesapp.databinding.FragmentExploreBinding
-import com.example.moviesapp.models.SortFilter
 import com.example.moviesapp.paging.LoaderAdapter
 import com.example.moviesapp.ui.MainViewModelFactory
-import com.example.moviesapp.util.SortBy
 import javax.inject.Inject
 
 private const val TAG = "ExploreFragment"
@@ -41,7 +40,8 @@ class ExploreFragment : Fragment() {
 
         binding = FragmentExploreBinding.inflate(inflater)
 
-        (activity?.application as MainApplication).applicationComponent.injectExplore(this)
+        val exploreComponent = (activity?.application as MainApplication).applicationComponent.exploreComponent().create(args.sortBy)
+        exploreComponent.inject(this)
 
         viewModel = ViewModelProvider(this, mainViewModelFactory)[ExploreViewModel::class.java]
 
@@ -52,8 +52,6 @@ class ExploreFragment : Fragment() {
         initializeAdapter()
 
         initializeClickListeners()
-
-        viewModel.sortMovies(SortFilter(-1, args.sortBy.displayName, args.sortBy.notation, false))
 
         return binding.root
     }
@@ -78,6 +76,9 @@ class ExploreFragment : Fragment() {
                 .navigate(ExploreFragmentDirections.actionExploreFragmentToDetailsFragment(it))
         })
 
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
         binding.moviesListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -87,11 +88,32 @@ class ExploreFragment : Fragment() {
             )
         }
 
-        viewModel.moviesList.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        adapter.addLoadStateListener { loadState ->
+            when (loadState.source.refresh) {
+                is LoadState.NotLoading -> {
+                    if (loadState.source.refresh is LoadState.NotLoading) {
+                        binding.moviesListRecyclerView.visibility = View.VISIBLE
+                        if (loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
+                            Log.i(TAG, "initializeAdapter: empty list")
+                        } else {
+                            Log.i(TAG, "initializeAdapter: list present")
+                            binding.progressBarExploreFragment.visibility = View.GONE
+                        }
+                    }
+                }
+                is LoadState.Loading -> {
+                    binding.progressBarExploreFragment.visibility = View.VISIBLE
+                    binding.moviesListRecyclerView.visibility = View.GONE
+                }
+                is LoadState.Error -> {
+                    Toast.makeText(context, "Error loading data", Toast.LENGTH_SHORT).show()
+                }
             }
-        })
+        }
+
+        viewModel.moviesList.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
     }
 
     companion object {

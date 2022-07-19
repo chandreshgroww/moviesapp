@@ -1,5 +1,6 @@
 package com.example.moviesapp.paging
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
 
+private const val TAG = "LoaderAdapter"
+
 class LoaderAdapter: LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
 
     class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -18,6 +21,7 @@ class LoaderAdapter: LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
         private val errorTextView = itemView.findViewById<TextView>(R.id.error_textView)
 
         fun bind(loadState: LoadState) {
+            Log.i(TAG, "bind: $loadState")
             progressBar.isVisible = loadState is LoadState.Loading
             errorTextView.isVisible = loadState is LoadState.Error
         }

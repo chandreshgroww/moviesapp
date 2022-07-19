@@ -1,10 +1,7 @@
 package com.example.moviesapp.network
 
 import androidx.lifecycle.LiveData
-import com.example.moviesapp.models.DiscoverResult
-import com.example.moviesapp.models.GenreResult
-import com.example.moviesapp.models.Movie
-import com.example.moviesapp.models.MovieDetail
+import com.example.moviesapp.models.*
 import com.example.moviesapp.util.Constants
 import com.example.moviesapp.util.Result
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
