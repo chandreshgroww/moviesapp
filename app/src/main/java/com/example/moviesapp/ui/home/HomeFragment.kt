@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.moviesapp.MainApplication
@@ -87,7 +86,7 @@ class HomeFragment : Fragment() {
         verticalAdapter: MovieListAdapter,
         binding: FragmentHomeBinding
     ) {
-        viewModel.popularMovieList.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.popularMovieList.observe(viewLifecycleOwner) { result ->
             when (result.status) {
                 Result.Status.SUCCESS -> {
                     result.data?.let { verticalAdapter.submitList(it) }
@@ -97,14 +96,14 @@ class HomeFragment : Fragment() {
                     Snackbar.make(binding.root, result.message!!, Snackbar.LENGTH_LONG).show()
                 }
             }
-        })
+        }
     }
 
     private fun addHorizontalMovieObserver(
         horizontalAdapter: MovieListAdapter,
         binding: FragmentHomeBinding
     ) {
-        viewModel.voteCountMovieList.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.voteCountMovieList.observe(viewLifecycleOwner) { result ->
             when (result.status) {
                 Result.Status.SUCCESS -> {
                     result.data?.let { horizontalAdapter.submitList(it) }
@@ -114,7 +113,7 @@ class HomeFragment : Fragment() {
                     Snackbar.make(binding.root, result.message!!, Snackbar.LENGTH_LONG).show()
                 }
             }
-        })
+        }
     }
 
 }

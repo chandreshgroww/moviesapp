@@ -18,7 +18,7 @@ class MoviePagingAdapter(private val movieClickListener: MovieClickListener) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoviePagingAdapter.ViewHolder {
+    ): ViewHolder {
         return ViewHolder.from(parent)
     }
 

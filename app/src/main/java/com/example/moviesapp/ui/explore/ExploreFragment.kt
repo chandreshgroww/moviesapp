@@ -7,25 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
-import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.MainApplication
 import com.example.moviesapp.adapter.MovieClickListener
 import com.example.moviesapp.adapter.MoviePagingAdapter
 import com.example.moviesapp.databinding.FragmentExploreBinding
-import com.example.moviesapp.models.SortFilter
 import com.example.moviesapp.paging.LoaderAdapter
 import com.example.moviesapp.ui.MainViewModelFactory
-import com.example.moviesapp.util.SortBy
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 private const val TAG = "ExploreFragment"
@@ -118,9 +111,9 @@ class ExploreFragment : Fragment() {
             }
         }
 
-        viewModel.moviesList.observe(viewLifecycleOwner, Observer {
-                adapter.submitData(viewLifecycleOwner.lifecycle, it)
-        })
+        viewModel.moviesList.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
     }
 
     companion object {

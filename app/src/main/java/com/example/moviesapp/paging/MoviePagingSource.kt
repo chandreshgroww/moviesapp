@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.moviesapp.models.Movie
-import com.example.moviesapp.network.BaseDataSource
 import com.example.moviesapp.network.IRemoteDataSource
-import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
 

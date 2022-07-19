@@ -5,9 +5,6 @@ import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
 import com.example.moviesapp.repository.MovieRepository
 import com.example.moviesapp.util.Result
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 

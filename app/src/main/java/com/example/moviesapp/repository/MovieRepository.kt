@@ -1,16 +1,11 @@
 package com.example.moviesapp.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import androidx.paging.*
 import com.example.moviesapp.database.ILocalDataSource
-import com.example.moviesapp.database.LocalDataSource
-import com.example.moviesapp.database.LocalDatabase
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.models.MovieDetail
-import com.example.moviesapp.models.SortFilter
 import com.example.moviesapp.network.IRemoteDataSource
-import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.paging.MoviePagingSource
 import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy

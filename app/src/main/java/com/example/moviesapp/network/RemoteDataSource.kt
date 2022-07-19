@@ -1,7 +1,6 @@
 package com.example.moviesapp.network
 
 import com.example.moviesapp.models.*
-import com.example.moviesapp.repository.DataSource
 import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
 import javax.inject.Inject
