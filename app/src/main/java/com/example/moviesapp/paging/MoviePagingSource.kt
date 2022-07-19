@@ -5,6 +5,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.moviesapp.models.Movie
 import com.example.moviesapp.network.BaseDataSource
+import com.example.moviesapp.network.IRemoteDataSource
 import com.example.moviesapp.network.RemoteDataSource
 import com.example.moviesapp.util.Result
 import com.example.moviesapp.util.SortBy
@@ -12,7 +13,7 @@ import com.example.moviesapp.util.SortBy
 private const val TAG = "MoviePagingSource"
 
 class MoviePagingSource(
-    private val remoteDataSource: RemoteDataSource,
+    private val remoteDataSource: IRemoteDataSource,
     private val sortBy: SortBy,
     private val withGenres: String
 ) :

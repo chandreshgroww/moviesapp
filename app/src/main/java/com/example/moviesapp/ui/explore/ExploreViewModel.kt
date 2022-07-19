@@ -1,5 +1,6 @@
 package com.example.moviesapp.ui.explore
 
+import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -56,6 +57,7 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun initializeGenreList(genreList: List<SortFilter>) {
+        Log.i(TAG, "initializeGenreList: $genreList")
         _sortFilterQuery.value?.genres = genreList.toMutableList()
     }
 

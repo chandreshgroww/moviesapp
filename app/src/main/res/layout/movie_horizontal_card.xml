@@ -90,48 +90,26 @@
             app:layout_constraintTop_toTopOf="@+id/rating_imageView"
             tools:text="8.1/10 IMDb" />
 
-        <HorizontalScrollView
-            android:id="@+id/chipGroup_horizontal_Scroll"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:scrollbars="none"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/rating_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/rating_imageView">
-
-
-            <LinearLayout
-                android:id="@+id/tags_chipGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:scrollbars="none"
-                app:singleLine="true" />
-
-        </HorizontalScrollView>
-
         <ImageView
             android:id="@+id/author_icon"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:src="@drawable/ic_baseline_access_time_24"
             app:layout_constraintStart_toStartOf="@+id/rating_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup_horizontal_Scroll" />
+            app:layout_constraintTop_toBottomOf="@+id/rating_imageView" />
 
         <TextView
             android:id="@+id/author_name_articles_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="1h 45m"
+            android:text="@{movie.release_date}"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@+id/author_icon"
             app:layout_constraintStart_toEndOf="@+id/author_icon"
             app:layout_constraintTop_toTopOf="@+id/author_icon"
-            tools:text="1h 45m" />
+            tools:text="2022-04-05" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
